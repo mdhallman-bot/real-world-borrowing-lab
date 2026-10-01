@@ -13,7 +13,7 @@ button.alt{background:#52606d} button.choice{display:block;width:100%;text-align
 input,textarea,select{width:100%;padding:9px;border:1px solid #9aa8b5;border-radius:8px;font:inherit}textarea{min-height:74px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}.stat{background:#f6f8fa;border:1px solid var(--line);padding:10px;border-radius:10px}
 .small{font-size:.88rem;color:var(--muted)}.feedback{padding:11px;border-radius:9px;margin-top:9px;display:none}.good{background:var(--green)}.warn{background:var(--red)}.info{background:var(--sky)}
-.gloss{border-bottom:2px dotted #567;cursor:help;position:relative;font-weight:700}.gloss:hover:after{content:attr(data-def);position:absolute;z-index:5;left:0;top:1.4em;width:250px;background:#17212b;color:white;padding:8px;border-radius:7px;font-size:.85rem;font-weight:normal}
+
 .carhero{display:grid;grid-template-columns:minmax(260px,1.05fr) minmax(300px,1fr);gap:18px;align-items:center;background:linear-gradient(135deg,#f8fafc,#eaf3fb);border:1px solid var(--line);border-radius:14px;padding:16px;margin:10px 0 16px}
 .carhero img{width:100%;max-height:255px;object-fit:contain}.offergrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}.offer{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}.offer .price{font-size:1.35rem;font-weight:800}
 .tag{display:inline-block;padding:4px 8px;border-radius:999px;background:#dceaf7;font-size:.8rem;font-weight:700;margin-bottom:6px}.sourcebox{font-size:.82rem;color:var(--muted);background:#f6f8fa;border-left:4px solid #8ba7bf;padding:9px;margin-top:10px}
@@ -28,60 +28,74 @@ a{color:#155d93;font-weight:700} .sticky{position:sticky;top:0;background:#fffbe
 #printSummary{display:none}.checklist td:last-child{text-align:center;font-weight:700}
 @media(max-width:760px){.carhero,.offergrid{grid-template-columns:1fr}} @media print{button,.no-print,.sticky{display:none!important}#printSummary{display:block!important}.completionbox{break-inside:avoid} body{background:#fff}.card{box-shadow:none;break-inside:avoid}}
 
-/* Vocabulary tooltip accessibility fix */
+
+
+
+
+/* Single vocabulary-tooltip implementation.
+   IMPORTANT: vocabulary spans store definitions in data-tip. */
 .gloss{
   position:relative;
   display:inline;
   border-bottom:2px dotted #315f86;
   cursor:help;
-  font-weight:600;
+  font-weight:700;
 }
 .gloss::after{
   content:attr(data-tip);
+  display:block;
   position:absolute;
   left:50%;
-  bottom:calc(100% + 8px);
+  bottom:calc(100% + 10px);
   transform:translateX(-50%);
-  width:max-content;
-  max-width:320px;
-  min-width:180px;
+  width:280px;
+  max-width:min(280px,80vw);
+  box-sizing:border-box;
   padding:10px 12px;
+  border:1px solid #9db3c7;
   border-radius:8px;
-  background:#17212b !important;
-  color:#ffffff !important;
-  font-family:Arial, Helvetica, sans-serif !important;
-  font-size:14px !important;
-  font-weight:400 !important;
-  line-height:1.35 !important;
-  text-align:left !important;
-  white-space:normal !important;
-  box-shadow:0 4px 14px rgba(0,0,0,.25);
+  background:#ffffff;
+  color:#102f4b;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:14px;
+  font-weight:400;
+  line-height:1.4;
+  text-align:left;
+  white-space:normal;
+  box-shadow:0 5px 18px rgba(0,0,0,.22);
   opacity:0;
   visibility:hidden;
   pointer-events:none;
-  z-index:99999;
+  z-index:100000;
 }
 .gloss::before{
   content:"";
   position:absolute;
   left:50%;
-  bottom:calc(100% + 2px);
+  bottom:calc(100% + 4px);
   transform:translateX(-50%);
   border:6px solid transparent;
-  border-top-color:#17212b;
+  border-top-color:#9db3c7;
   opacity:0;
   visibility:hidden;
   pointer-events:none;
-  z-index:99999;
+  z-index:100001;
 }
 .gloss:hover::after,.gloss:focus::after,
 .gloss:hover::before,.gloss:focus::before{
   opacity:1;
   visibility:visible;
 }
-.gloss:focus{outline:2px solid #315f86;outline-offset:2px}
-@media (max-width:760px){
-  .gloss::after{max-width:260px;min-width:160px;font-size:13px !important}
+.gloss:focus{
+  outline:2px solid #315f86;
+  outline-offset:2px;
+}
+@media(max-width:760px){
+  .gloss::after{
+    width:240px;
+    max-width:78vw;
+    font-size:13px;
+  }
 }
 @media print{
   .gloss{border-bottom:none;font-weight:inherit}
@@ -95,7 +109,7 @@ a{color:#155d93;font-weight:700} .sticky{position:sticky;top:0;background:#fffbe
 </div>
 <div class="sticky">TODAY'S RULE: Never make a <span class="gloss" tabindex="0" data-tip="Using money now that must be repaid later, usually under agreed terms.">borrowing</span> decision from one number.</div>
 <header><h1>Unit 4 • Day 4 — Real-World <span class="gloss" tabindex="0" data-tip="Using money now that must be repaid later, usually under agreed terms.">Borrowing</span> Lab</h1>
-<p><b>Learning target:</b> I can <span class="gloss" data-def="To judge something using evidence and criteria.">evaluate</span> real borrowing offers by looking beyond the advertised payment and using <span class="gloss" data-def="Annual Percentage Rate: an annualized measure of the cost of borrowing that helps compare credit offers.">APR</span>, fees, <span class="gloss" data-def="The length of time scheduled to repay a loan.">term</span>, <span class="gloss" data-def="The full amount paid for borrowing, including principal, interest, and applicable required fees.">total cost</span>, ownership/<span class="gloss" data-def="Property pledged to secure a loan that a lender may be able to claim after default.">collateral</span>, and my <span class="gloss" data-def="A plan for income, spending, saving, and debt payments.">budget</span>.</p></header>
+<p><b>Learning target:</b> I can <span class="gloss" tabindex="0" data-tip="To judge something using evidence and criteria.">evaluate</span> real borrowing offers by looking beyond the advertised payment and using <span class="gloss" tabindex="0" data-tip="Annual Percentage Rate: an annualized measure of the cost of borrowing that helps compare credit offers.">APR</span>, fees, <span class="gloss" tabindex="0" data-tip="The length of time scheduled to repay a loan.">term</span>, <span class="gloss" tabindex="0" data-tip="The full amount paid for borrowing, including principal, interest, and applicable required fees.">total cost</span>, ownership/<span class="gloss" tabindex="0" data-tip="Property pledged to secure a loan that a lender may be able to claim after default.">collateral</span>, and my <span class="gloss" tabindex="0" data-tip="A plan for income, spending, saving, and debt payments.">budget</span>.</p></header>
 <main>
 <div class="bigidea">Real-world question: <b>What number does the offer want you to notice first—and what information do you still need?</b></div>
 
@@ -165,7 +179,7 @@ a{color:#155d93;font-weight:700} .sticky{position:sticky;top:0;background:#fffbe
 <div class="timeline"><div class="due">Headphones<br><b>$45</b></div><div class="due">Concert ticket<br><b>$28</b></div><div class="due">Clothes<br><b>$37</b></div><div class="due">New sneakers<br><b>$30</b></div></div>
 <div class="bigidea">Total due this week = <b>$140</b>. “Only $30” described one payment—not Kai's whole <span class="gloss" tabindex="0" data-tip="Using money now that must be repaid later, usually under agreed terms.">borrowing</span> picture.</div>
 <p>CFPB research found that about <b>63% of <span class="gloss" tabindex="0" data-tip="<span class="gloss" tabindex="0" data-tip="To purchase and obtain ownership of an item, often immediately or after a financed loan is repaid.">Buy</span> Now, Pay Later: installment borrowing that splits a purchase into multiple payments.">BNPL</span> borrowers</b> had multiple simultaneous <span class="gloss" tabindex="0" data-tip="<span class="gloss" tabindex="0" data-tip="To purchase and obtain ownership of an item, often immediately or after a financed loan is repaid.">Buy</span> Now, Pay Later: installment borrowing that splits a purchase into multiple payments.">BNPL</span> loans at some point in 2022.</p>
-<textarea placeholder="What should Kai check before accepting another $30 payment? Connect your answer to <span class="gloss" data-def="How well a payment fits a person's full budget without crowding out necessities, savings, or other obligations.">affordability</span>."></textarea>
+<textarea placeholder="What should Kai check before accepting another $30 payment? Connect your answer to <span class="gloss" tabindex="0" data-tip="How well a payment fits a person's full budget without crowding out necessities, savings, or other obligations.">affordability</span>."></textarea>
 <div class="sourcebox">Source: Consumer Financial Protection Bureau. <a href="https://www.consumerfinance.gov/ask-cfpb/what-is-a-buy-now-pay-later-bnpl-loan-en-2119/" target="_blank" rel="noopener">What is <span class="gloss" tabindex="0" data-tip="<span class="gloss" tabindex="0" data-tip="To purchase and obtain ownership of an item, often immediately or after a financed loan is repaid.">Buy</span> Now, Pay Later: installment borrowing that splits a purchase into multiple payments.">BNPL</span>?</a> • <a href="https://www.consumerfinance.gov/data-research/research-reports/consumer-use-of-buy-now-pay-later-and-other-unsecured-debt/" target="_blank" rel="noopener"><span class="gloss" tabindex="0" data-tip="<span class="gloss" tabindex="0" data-tip="To purchase and obtain ownership of an item, often immediately or after a financed loan is repaid.">Buy</span> Now, Pay Later: installment borrowing that splits a purchase into multiple payments.">BNPL</span> research</a></div>
 </div>
 </section>
@@ -179,7 +193,7 @@ a{color:#155d93;font-weight:700} .sticky{position:sticky;top:0;background:#fffbe
 <div class="price">$500 today</div><p><b>Amount due in two weeks:</b> $575</p><p><b><span class="gloss" tabindex="0" data-tip="Using money now that must be repaid later, usually under agreed terms.">Borrowing</span> charge:</b> $75</p><p><b><span class="gloss" tabindex="0" data-tip="Paying borrowed money back according to the loan or credit agreement.">Repayment</span>:</b> one lump-sum payment</p></div>
 <p class="small">This classic $500 → $575 structure is used to <span class="gloss" tabindex="0" data-tip="To break information into parts and examine how those parts affect a decision.">analyze</span> the mechanics and risk of very short-term <span class="gloss" tabindex="0" data-tip="Using money now that must be repaid later, usually under agreed terms.">borrowing</span>. Colorado's traditional payday market changed after the state's 36% <span class="gloss" tabindex="0" data-tip="Annual Percentage Rate: a yearly measure used to compare the cost of borrowing, including interest and certain fees.">APR</span> cap; the simulation is not presented as a current legal Colorado payday offer.</p>
 <table><thead><tr><th>Record the offer</th><th>Your answer</th></tr></thead><tbody>
-<tr><td>How much cash do you receive?</td><td><input></td></tr><tr><td>How much must you repay?</td><td><input></td></tr><tr><td>How soon is <span class="gloss" tabindex="0" data-tip="Paying borrowed money back according to the loan or credit agreement.">repayment</span> due?</td><td><input></td></tr><tr><td>What is the dollar <span class="gloss" data-def="The dollar cost of consumer credit, including interest and certain required charges.">finance charge</span>?</td><td><input></td></tr></tbody></table>
+<tr><td>How much cash do you receive?</td><td><input></td></tr><tr><td>How much must you repay?</td><td><input></td></tr><tr><td>How soon is <span class="gloss" tabindex="0" data-tip="Paying borrowed money back according to the loan or credit agreement.">repayment</span> due?</td><td><input></td></tr><tr><td>What is the dollar <span class="gloss" tabindex="0" data-tip="The dollar cost of consumer credit, including interest and certain required charges.">finance charge</span>?</td><td><input></td></tr></tbody></table>
 
 <h3>Paycheck 1 — the loan solved the repair problem</h3>
 <p>Your next paycheck is <b>$1,250</b>. Your normal necessary expenses before the next paycheck total <b>$1,100</b>.</p>
@@ -200,7 +214,7 @@ a{color:#155d93;font-weight:700} .sticky{position:sticky;top:0;background:#fffbe
 <table><thead><tr><th>Potential benefit</th><th>Potential risk</th></tr></thead><tbody>
 <tr><td>Fast access to money for an <span class="gloss" tabindex="0" data-tip="Needing attention or action very soon.">urgent</span> expense</td><td><span class="gloss" tabindex="0" data-tip="Paying borrowed money back according to the loan or credit agreement.">Repayment</span> can consume money needed for the next pay period</td></tr>
 <tr><td>May prevent a larger immediate problem, such as missing work</td><td>Short <span class="gloss" tabindex="0" data-tip="Paying borrowed money back according to the loan or credit agreement.">repayment</span> windows can make the payment difficult to absorb</td></tr>
-<tr><td>Can bridge a temporary timing gap when <span class="gloss" tabindex="0" data-tip="Paying borrowed money back according to the loan or credit agreement.">repayment</span> truly fits the next <span class="gloss" tabindex="0" data-tip="A plan for how income will be used for spending, saving, and <span class="gloss" tabindex="0" data-tip="Money that is owed to another person or organization.">debt</span> payments.">budget</span></td><td><span class="gloss" data-def="Taking new credit after or while repaying earlier borrowing, often to cover a continuing cash shortage.">Reborrowing</span> can develop if the underlying shortage remains</td></tr>
+<tr><td>Can bridge a temporary timing gap when <span class="gloss" tabindex="0" data-tip="Paying borrowed money back according to the loan or credit agreement.">repayment</span> truly fits the next <span class="gloss" tabindex="0" data-tip="A plan for how income will be used for spending, saving, and <span class="gloss" tabindex="0" data-tip="Money that is owed to another person or organization.">debt</span> payments.">budget</span></td><td><span class="gloss" tabindex="0" data-tip="Taking new credit after or while repaying earlier borrowing, often to cover a continuing cash shortage.">Reborrowing</span> can develop if the underlying shortage remains</td></tr>
 </tbody></table>
 <textarea placeholder="When could short-term borrowing solve a real problem? What would you need to know before accepting it?"></textarea>
 
@@ -215,7 +229,7 @@ a{color:#155d93;font-weight:700} .sticky{position:sticky;top:0;background:#fffbe
 <div class="offer">
 <span class="tag">REAL PUBLISHED PERSONAL-LOAN EXAMPLE • UPGRADE</span>
 <h3 style="margin:.2rem 0">Headline: $10,000 personal loan</h3>
-<p><b>Published example:</b> 36-month term • 17.59% APR • 13.94% yearly interest rate • 5% one-time <span class="gloss" data-def="A one-time charge for making or processing a loan; it may be deducted from the money the borrower receives.">origination fee</span>.</p>
+<p><b>Published example:</b> 36-month term • 17.59% APR • 13.94% yearly interest rate • 5% one-time <span class="gloss" tabindex="0" data-tip="A one-time charge for making or processing a loan; it may be deducted from the money the borrower receives.">origination fee</span>.</p>
 <p>The <span class="gloss" tabindex="0" data-tip="A charge for a service, transaction, loan, or account.">fee</span> is deducted from the <span class="gloss" tabindex="0" data-tip="The money a <span class="gloss" tabindex="0" data-tip="A person or organization that receives money or credit and agrees to repay it.">borrower</span> actually receives from a loan after any deductions that are taken before disbursement.">loan proceeds</span>, so the <span class="gloss" tabindex="0" data-tip="A person or organization that receives money or credit and agrees to repay it.">borrower</span> receives <b>$9,500</b>. Upgrade's published example lists a required payment of <b>$341.48/month</b> and total payments of <b>$12,293.46</b>.</p>
 </div>
 <p class="small">This is a lender-published example, not a personalized offer to you. Actual rates/terms depend on <span class="gloss" tabindex="0" data-tip="Meeting the requirements needed to qualify for an offer, loan, or program.">eligibility</span> and other factors. Upgrade currently discloses personal-loan APRs of 7.74%–35.99%, origination <span class="gloss" tabindex="0" data-tip="Charges added for a service, transaction, loan, or account.">fees</span> of 1.85%–9.99%, and terms from 24–84 months.</p>
@@ -225,7 +239,7 @@ a{color:#155d93;font-weight:700} .sticky{position:sticky;top:0;background:#fffbe
 <tr><td>Loan amount</td><td><input></td><td><input></td></tr>
 <tr><td><span class="gloss" tabindex="0" data-tip="Annual Percentage Rate: a yearly measure used to compare the cost of borrowing, including interest and certain fees.">APR</span></td><td><input></td><td><input></td></tr>
 <tr><td>Yearly <span class="gloss" tabindex="0" data-tip="The percentage charged for <span class="gloss" tabindex="0" data-tip="Using money now that must be repaid later, usually under agreed terms.">borrowing</span> money, usually stated as a yearly rate."><span class="gloss" tabindex="0" data-tip="The cost paid for using borrowed money.">interest</span> rate</span></td><td><input></td><td><input></td></tr>
-<tr><td><span class="gloss" data-def="A one-time charge for making or processing a loan; it may be deducted from the money the borrower receives.">Origination fee</span></td><td><input></td><td><input></td></tr>
+<tr><td><span class="gloss" tabindex="0" data-tip="A one-time charge for making or processing a loan; it may be deducted from the money the borrower receives.">Origination fee</span></td><td><input></td><td><input></td></tr>
 <tr><td>Cash actually received</td><td><input></td><td><input></td></tr>
 <tr><td><span class="gloss" tabindex="0" data-tip="The amount a <span class="gloss" tabindex="0" data-tip="A person or organization that receives money or credit and agrees to repay it.">borrower</span> is scheduled to pay each month.">Monthly payment</span></td><td><input></td><td><input></td></tr>
 <tr><td><span class="gloss" tabindex="0" data-tip="The length of time allowed to repay a loan.">Term</span></td><td><input></td><td><input></td></tr>
@@ -242,14 +256,14 @@ a{color:#155d93;font-weight:700} .sticky{position:sticky;top:0;background:#fffbe
 
 <section class="card" data-section="Mortgage Transfer"><h2>5. <span class="gloss" tabindex="0" data-tip="A loan used to <span class="gloss" tabindex="0" data-tip="To purchase and obtain ownership of an item, often immediately or after a financed loan is repaid.">buy</span> real estate, usually <span class="gloss" tabindex="0" data-tip="Backed by collateral that a <span class="gloss" tabindex="0" data-tip="A person or organization that provides money or credit that must be repaid.">lender</span> may be able to take if the borrower does not repay as agreed.">secured</span> by the property.">Mortgage</span> Transfer — <span class="gloss" tabindex="0" data-tip="A <span class="gloss" tabindex="0" data-tip="A person or organization that provides money or credit that must be repaid.">lender</span>&#x27;s decision to allow a <span class="gloss" tabindex="0" data-tip="A person or organization that receives money or credit and agrees to repay it.">borrower</span> to receive credit; approval does not necessarily mean the payment is affordable.">Approval</span> ≠ <span class="gloss" tabindex="0" data-tip="Whether a cost fits a person&#x27;s <span class="gloss" tabindex="0" data-tip="A plan for how income will be used for spending, saving, and <span class="gloss" tabindex="0" data-tip="Money that is owed to another person or organization.">debt</span> payments.">budget</span> while still leaving enough money for other needs and financial goals.">Affordability</span></h2>
 <p>A family is approved for a <span class="gloss" tabindex="0" data-tip="A loan used to <span class="gloss" tabindex="0" data-tip="To purchase and obtain ownership of an item, often immediately or after a financed loan is repaid.">buy</span> real estate, usually <span class="gloss" tabindex="0" data-tip="Backed by collateral that a <span class="gloss" tabindex="0" data-tip="A person or organization that provides money or credit that must be repaid.">lender</span> may be able to take if the borrower does not repay as agreed.">secured</span> by the property.">mortgage</span>. After the estimated housing payment, food, utilities, transportation, insurance, and minimum <span class="gloss" tabindex="0" data-tip="Money that is owed to another person or organization.">debt</span> payments, only <b>$85/month</b> remains for <span class="gloss" tabindex="0" data-tip="Money set aside for future needs, goals, or emergencies.">savings</span> and unexpected expenses.</p>
-<p><b>Remember:</b> A mortgage is <span class="gloss" data-def="Credit repaid in scheduled payments over a set period.">installment credit</span> secured by the home. The home is <span class="gloss" data-def="Property pledged to secure repayment of a loan.">collateral</span>.</p>
+<p><b>Remember:</b> A mortgage is <span class="gloss" tabindex="0" data-tip="Credit repaid in scheduled payments over a set period.">installment credit</span> secured by the home. The home is <span class="gloss" tabindex="0" data-tip="Property pledged to secure repayment of a loan.">collateral</span>.</p>
 <button class="choice" onclick="choose(this)"><span class="gloss" tabindex="0" data-tip="A <span class="gloss" tabindex="0" data-tip="A person or organization that provides money or credit that must be repaid.">lender</span>&#x27;s decision to allow a <span class="gloss" tabindex="0" data-tip="A person or organization that receives money or credit and agrees to repay it.">borrower</span> to receive credit; approval does not necessarily mean the payment is affordable.">Approval</span> proves the <span class="gloss" tabindex="0" data-tip="A loan used to <span class="gloss" tabindex="0" data-tip="To purchase and obtain ownership of an item, often immediately or after a financed loan is repaid.">buy</span> real estate, usually <span class="gloss" tabindex="0" data-tip="Backed by collateral that a <span class="gloss" tabindex="0" data-tip="A person or organization that provides money or credit that must be repaid.">lender</span> may be able to take if the borrower does not repay as agreed.">secured</span> by the property.">mortgage</span> is affordable.</button>
 <button class="choice" onclick="choose(this)"><span class="gloss" tabindex="0" data-tip="A <span class="gloss" tabindex="0" data-tip="A person or organization that provides money or credit that must be repaid.">lender</span>&#x27;s decision to allow a <span class="gloss" tabindex="0" data-tip="A person or organization that receives money or credit and agrees to repay it.">borrower</span> to receive credit; approval does not necessarily mean the payment is affordable.">Approval</span> means a <span class="gloss" tabindex="0" data-tip="A person or organization that provides money or credit that must be repaid.">lender</span> is willing to lend; the family still must judge whether the payment fits its whole <span class="gloss" tabindex="0" data-tip="A plan for how income will be used for spending, saving, and <span class="gloss" tabindex="0" data-tip="Money that is owed to another person or organization.">debt</span> payments.">budget</span>.</button>
 <textarea placeholder="Explain the difference between being approved and being able to comfortably afford the debt. What consequence is connected to the home being collateral?"></textarea>
 </section>
 
 <section class="card" data-section="Final Challenge"><h2>6. Final Challenge — The Payment Fits. Does the Loan?</h2>
-<p>Riley needs reliable transportation for a new job. First, read Riley's monthly <span class="gloss" data-def="A plan for income, spending, saving, and debt payments.">budget</span>. Then compare the two loan offers. There is no useful decision until you look at <b>both</b>.</p>
+<p>Riley needs reliable transportation for a new job. First, read Riley's monthly <span class="gloss" tabindex="0" data-tip="A plan for income, spending, saving, and debt payments.">budget</span>. Then compare the two loan offers. There is no useful decision until you look at <b>both</b>.</p>
 <div class="grid">
 <div><h3>Riley's monthly <span class="gloss" tabindex="0" data-tip="A plan for how income will be used for spending, saving, and <span class="gloss" tabindex="0" data-tip="Money that is owed to another person or organization.">debt</span> payments.">budget</span></h3><table><tbody>
 <tr><td>Take-home income</td><td><b>$3,150</b></td></tr>
