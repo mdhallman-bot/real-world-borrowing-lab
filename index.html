@@ -55,20 +55,28 @@ a{color:#155d93;font-weight:700} .sticky{position:sticky;top:0;background:#fffbe
 <textarea placeholder="Which looks most affordable at first glance? What number grabbed your attention?"></textarea>
 
 <h3>Now investigate the purchase</h3>
-<p>For classroom comparison, start with a <b>$28,395 vehicle price</b> and use the same <b>$3,999 up-front amount</b>. We hold other costs out so we can isolate APR and term. The finance payments below are <b>our calculations</b>, not Honda-advertised payments.</p>
+<p>The lease headline includes <b>$3,999 due at signing</b>. That is money a customer would need up front to begin the lease; it is not the same thing as a monthly payment.</p>
+<p>For the purchase comparison, <b>do not assume you have $3,999 available</b>. Start with a <b>$28,395 vehicle price</b>, a <b>$0 <span class="gloss" data-tip="Money paid up front toward a purchase. A larger down payment reduces the amount you need to borrow, but it also requires more cash today.">down payment</span></b>, 3.99% APR, and a 60-month term. Then test what happens with $1,000 and $3,000 down. We hold other costs out so we can isolate the effect of the down payment. The finance payments below are <b>our classroom calculations</b>, not Honda-advertised payments.</p>
 <div class="grid">
 <label>Vehicle price ($)<input id="amt" type="number" value="28395"></label>
-<label>Up-front / down payment ($)<input id="down" type="number" value="3999"></label>
+<label>Up-front / down payment ($)<input id="down" type="number" value="0" step="100"></label>
 <label>APR (%)<input id="apr" type="number" value="3.99" step=".01"></label>
 <label>Term (months)<select id="term"><option>36</option><option>48</option><option selected>60</option><option>72</option><option>84</option></select></label>
 </div>
 <button onclick="calcLoan()">Calculate purchase</button><button class="alt" onclick="load72()">Load 72-month Honda APR</button>
 <div class="grid"><div class="stat"><b>Monthly payment</b><div id="monthly">—</div></div><div class="stat"><b>Total loan payments</b><div id="total">—</div></div><div class="stat"><b>Interest paid</b><div id="interest">—</div></div><div class="stat"><b>Amount financed</b><div id="financed">—</div></div></div>
-<table><thead><tr><th>Change</th><th>Monthly payment</th><th>Total borrowing cost</th></tr></thead><tbody>
-<tr><td>Lengthen the term</td><td><input placeholder="up / down?"></td><td><input placeholder="up / down?"></td></tr>
-<tr><td>Raise APR</td><td><input placeholder="up / down?"></td><td><input placeholder="up / down?"></td></tr>
-<tr><td>Increase down payment</td><td><input placeholder="up / down?"></td><td><input placeholder="up / down?"></td></tr></tbody></table>
-<p><b>Lease vs. buy:</b> Why is “$229 is cheapest” an incomplete conclusion?</p><textarea placeholder="Use monthly payment, term, total cost, and ownership where useful."></textarea>
+<h3>What does a down payment actually do?</h3>
+<p>Keep the rate at <b>3.99% APR</b> and the term at <b>60 months</b>. Change only the down payment. Calculate each option and record the result.</p>
+<table><thead><tr><th>Down payment</th><th>Amount financed</th><th>Monthly payment</th><th>Total loan payments</th></tr></thead><tbody>
+<tr><td>$0</td><td><input placeholder="$"></td><td><input placeholder="$"></td><td><input placeholder="$"></td></tr>
+<tr><td>$1,000</td><td><input placeholder="$"></td><td><input placeholder="$"></td><td><input placeholder="$"></td></tr>
+<tr><td>$3,000</td><td><input placeholder="$"></td><td><input placeholder="$"></td><td><input placeholder="$"></td></tr>
+</tbody></table>
+<p><b>Analyze:</b> What benefit does a larger <span class="gloss" data-tip="Money paid up front toward a purchase. A larger down payment reduces the amount you need to borrow, but it also requires more cash today.">down payment</span> provide? What is the tradeoff?</p>
+<textarea placeholder="Think about cash needed today, amount borrowed, and monthly payment."></textarea>
+<p><b>Compare with the lease:</b> The advertised lease asks for $3,999 due at signing. How does needing that much cash up front change how you think about the $229 monthly payment?</p>
+<textarea placeholder="Explain why the advertised monthly payment does not tell the whole affordability story."></textarea>
+<p><b>Lease vs. buy:</b> After looking at cash due today and the purchase calculations, why is “$229 is cheapest” an incomplete conclusion?</p><textarea placeholder="Use cash due up front, monthly payment, term, total cost, and ownership where useful."></textarea>
 </section>
 
 <section class="card" data-section="BNPL"><h2>2. Checkout Trap — Buy Now, Pay Later</h2>
