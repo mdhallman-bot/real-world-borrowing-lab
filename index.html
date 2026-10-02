@@ -139,7 +139,7 @@ a{color:#155d93;font-weight:700} .sticky{position:sticky;top:0;background:#fffbe
 <label><span class="gloss" tabindex="0" data-tip="The length of time allowed to repay a loan.">Term</span> (months)<select id="term"><option>36</option><option>48</option><option selected>60</option><option>72</option><option>84</option></select></label>
 </div>
 <button onclick="calcLoan()">Calculate purchase</button><button class="alt" onclick="load72()">Load 72-month Honda <span class="gloss" tabindex="0" data-tip="Annual Percentage Rate: a yearly measure used to compare the cost of borrowing, including interest and certain fees.">APR</span></button>
-<div class="grid"><div class="stat"><b><span class="gloss" tabindex="0" data-tip="The amount a <span class="gloss" tabindex="0" data-tip="A person or organization that receives money or credit and agrees to repay it.">borrower</span> is scheduled to pay each month.">Monthly payment</span></b><div id="monthly">—</div></div><div class="stat"><b><span class="gloss" tabindex="0" data-tip="The sum of all scheduled loan payments over the <span class="gloss" tabindex="0" data-tip="Paying borrowed money back according to the loan or credit agreement.">repayment</span> period.">Total loan payments</span></b><div id="total">—</div></div><div class="stat"><b><span class="gloss" tabindex="0" data-tip="The cost paid for using borrowed money.">Interest</span> paid</b><div id="interest">—</div></div><div class="stat"><b><span class="gloss" tabindex="0" data-tip="The amount of the purchase that is being paid for with borrowed money.">Amount financed</span></b><div id="financed">—</div></div></div>
+<div class="grid"><div class="stat"><b><span class="gloss" tabindex="0" data-tip="The scheduled amount paid each month on the loan.">Monthly payment</span></b><div id="monthly">—</div></div><div class="stat"><b><span class="gloss" tabindex="0" data-tip="The sum of all scheduled loan payments over the repayment period.">Total loan payments</span></b><div id="total">—</div></div><div class="stat"><b><span class="gloss" tabindex="0" data-tip="The cost paid for using borrowed money.">Interest</span> paid</b><div id="interest">—</div></div><div class="stat"><b><span class="gloss" tabindex="0" data-tip="The amount of the purchase that is being paid for with borrowed money.">Amount financed</span></b><div id="financed">—</div></div></div>
 
 <div class="callout">
 <h3>One more real-world cost: taxes</h3>
@@ -155,11 +155,20 @@ a{color:#155d93;font-weight:700} .sticky{position:sticky;top:0;background:#fffbe
 </div>
 
 <h3>What does a <span class="gloss" tabindex="0" data-tip="Money paid up front toward a purchase. A larger down payment reduces the amount borrowed but requires more cash today.">down payment</span> actually do?</h3>
-<p>Use the <b>$30,638 price + classroom assumed tax</b>. Keep the rate at <b>3.99% <span class="gloss" tabindex="0" data-tip="Annual Percentage Rate: a yearly measure used to compare the cost of borrowing, including interest and certain fees.">APR</span></b> and the <span class="gloss" tabindex="0" data-tip="The length of time allowed to repay a loan.">term</span> at <b>60 months</b>. Change only the <span class="gloss" tabindex="0" data-tip="Money paid up front toward a purchase. A larger down payment reduces the amount borrowed but requires more cash today.">down payment</span>. Calculate each option and record the result.</p>
-<table><thead><tr><th><span class="gloss" tabindex="0" data-tip="Money paid up front toward a purchase. A larger down payment reduces the amount borrowed but requires more cash today.">Down payment</span></th><th><span class="gloss" tabindex="0" data-tip="The amount of the purchase that is being paid for with borrowed money.">Amount financed</span></th><th><span class="gloss" tabindex="0" data-tip="The amount a <span class="gloss" tabindex="0" data-tip="A person or organization that receives money or credit and agrees to repay it.">borrower</span> is scheduled to pay each month.">Monthly payment</span></th><th><span class="gloss" tabindex="0" data-tip="The sum of all scheduled loan payments over the <span class="gloss" tabindex="0" data-tip="Paying borrowed money back according to the loan or credit agreement.">repayment</span> period.">Total loan payments</span></th></tr></thead><tbody>
-<tr><td>$0</td><td><input placeholder="$"></td><td><input placeholder="$"></td><td><input placeholder="$"></td></tr>
-<tr><td>$1,000</td><td><input placeholder="$"></td><td><input placeholder="$"></td><td><input placeholder="$"></td></tr>
-<tr><td>$3,000</td><td><input placeholder="$"></td><td><input placeholder="$"></td><td><input placeholder="$"></td></tr>
+<p>Use the <b>$30,638 price + classroom assumed tax</b>. Keep the rate at <b>3.99% <span class="gloss" tabindex="0" data-tip="Annual Percentage Rate: a yearly measure used to compare the cost of borrowing.">APR</span></b> and the <span class="gloss" tabindex="0" data-tip="The length of time allowed to repay a loan.">term</span> at <b>60 months</b>. Change only the <span class="gloss" tabindex="0" data-tip="Money paid up front toward a purchase. A larger down payment reduces the amount borrowed but requires more cash today.">down payment</span>.</p>
+<div class="sourcebox"><b>Calculator:</b> Click below to calculate all three down-payment options at once. Then compare what changes.</div>
+<button type="button" onclick="calcDownPaymentTable()">Calculate all 3 options</button>
+<table>
+<thead><tr>
+<th><span class="gloss" tabindex="0" data-tip="Money paid up front toward a purchase.">Down payment</span></th>
+<th><span class="gloss" tabindex="0" data-tip="The part of the purchase price paid with borrowed money.">Amount financed</span></th>
+<th><span class="gloss" tabindex="0" data-tip="The scheduled amount paid each month on the loan.">Monthly payment</span></th>
+<th><span class="gloss" tabindex="0" data-tip="The sum of all scheduled loan payments over the repayment period.">Total loan payments</span></th>
+</tr></thead>
+<tbody>
+<tr><td>$0</td><td><input id="dp0-fin" readonly placeholder="Click Calculate"></td><td><input id="dp0-month" readonly placeholder="Click Calculate"></td><td><input id="dp0-total" readonly placeholder="Click Calculate"></td></tr>
+<tr><td>$1,000</td><td><input id="dp1000-fin" readonly placeholder="Click Calculate"></td><td><input id="dp1000-month" readonly placeholder="Click Calculate"></td><td><input id="dp1000-total" readonly placeholder="Click Calculate"></td></tr>
+<tr><td>$3,000</td><td><input id="dp3000-fin" readonly placeholder="Click Calculate"></td><td><input id="dp3000-month" readonly placeholder="Click Calculate"></td><td><input id="dp3000-total" readonly placeholder="Click Calculate"></td></tr>
 </tbody></table>
 <p><b><span class="gloss" tabindex="0" data-tip="To break information into parts and examine how those parts affect a decision.">Analyze</span>:</b> What benefit does a larger <span class="gloss" tabindex="0" data-tip="Money paid up front toward a purchase. A larger down payment reduces the amount you need to borrow, but it also requires more cash today.">down payment</span> provide? What is the tradeoff?</p>
 <textarea placeholder="Think about cash needed today, amount borrowed, and monthly payment."></textarea>
@@ -241,7 +250,7 @@ a{color:#155d93;font-weight:700} .sticky{position:sticky;top:0;background:#fffbe
 <tr><td>Yearly <span class="gloss" tabindex="0" data-tip="The percentage charged for <span class="gloss" tabindex="0" data-tip="Using money now that must be repaid later, usually under agreed terms.">borrowing</span> money, usually stated as a yearly rate."><span class="gloss" tabindex="0" data-tip="The cost paid for using borrowed money.">interest</span> rate</span></td><td><input></td><td><input></td></tr>
 <tr><td><span class="gloss" tabindex="0" data-tip="A one-time charge for making or processing a loan; it may be deducted from the money the borrower receives.">Origination fee</span></td><td><input></td><td><input></td></tr>
 <tr><td>Cash actually received</td><td><input></td><td><input></td></tr>
-<tr><td><span class="gloss" tabindex="0" data-tip="The amount a <span class="gloss" tabindex="0" data-tip="A person or organization that receives money or credit and agrees to repay it.">borrower</span> is scheduled to pay each month.">Monthly payment</span></td><td><input></td><td><input></td></tr>
+<tr><td><span class="gloss" tabindex="0" data-tip="The scheduled amount paid each month on the loan.">Monthly payment</span></td><td><input></td><td><input></td></tr>
 <tr><td><span class="gloss" tabindex="0" data-tip="The length of time allowed to repay a loan.">Term</span></td><td><input></td><td><input></td></tr>
 <tr><td>Total of payments</td><td><input></td><td><input></td></tr>
 </tbody></table>
@@ -271,7 +280,7 @@ a{color:#155d93;font-weight:700} .sticky{position:sticky;top:0;background:#fffbe
 <tr><th>Left before car payment</th><th>$535</th></tr>
 </tbody></table></div>
 <div><h3>Two offers for the same $19,000 financed</h3><table><thead><tr><th></th><th>A</th><th>B</th></tr></thead><tbody>
-<tr><td><span class="gloss" tabindex="0" data-tip="The amount a <span class="gloss" tabindex="0" data-tip="A person or organization that receives money or credit and agrees to repay it.">borrower</span> is scheduled to pay each month.">Monthly payment</span></td><td><b>$455</b></td><td><b>$335</b></td></tr>
+<tr><td><span class="gloss" tabindex="0" data-tip="The scheduled amount paid each month on the loan.">Monthly payment</span></td><td><b>$455</b></td><td><b>$335</b></td></tr>
 <tr><td><span class="gloss" tabindex="0" data-tip="The length of time allowed to repay a loan.">Term</span></td><td>48 mo.</td><td>72 mo.</td></tr>
 <tr><td>Total of listed payments</td><td><b>$21,840</b></td><td><b>$24,120</b></td></tr>
 <tr><td>Money left in Riley's monthly <span class="gloss" tabindex="0" data-tip="A plan for how income will be used for spending, saving, and <span class="gloss" tabindex="0" data-tip="Money that is owed to another person or organization.">debt</span> payments.">budget</span></td><td><b>$80</b></td><td><b>$200</b></td></tr>
@@ -312,6 +321,20 @@ a{color:#155d93;font-weight:700} .sticky{position:sticky;top:0;background:#fffbe
 <script>
 function choose(el){el.parentElement.querySelectorAll('.choice').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');scheduleSave()}
 function money(x){return x.toLocaleString(undefined,{style:'currency',currency:'USD',maximumFractionDigits:2})}
+function calcDownPaymentTable(){
+  const price=30638, apr=3.99, months=60, r=apr/1200;
+  [0,1000,3000].forEach(down=>{
+    const P=price-down;
+    const m=P*r*Math.pow(1+r,months)/(Math.pow(1+r,months)-1);
+    const total=m*months;
+    const key=down===0?'0':String(down);
+    document.getElementById('dp'+key+'-fin').value=money(P);
+    document.getElementById('dp'+key+'-month').value=money(m);
+    document.getElementById('dp'+key+'-total').value=money(total);
+  });
+  scheduleSave();
+}
+
 function calcLoan(){
  let price=+document.getElementById('amt').value||0,down=+document.getElementById('down').value||0,P=Math.max(0,price-down);
  let n=+document.getElementById('term').value,r=(+document.getElementById('apr').value||0)/1200;
